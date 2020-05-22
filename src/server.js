@@ -15,7 +15,8 @@ app.use(morgan('dev'));
 // Global Variables
 
 // Routes
-app.use(require('./routes/index.routes'));
-app.use(require('./routes/producto.routes'));
+app.use('/api', require('./routes/index.routes'));
+app.use('/api/login', require('./routes/login.routes'));
+app.use('/api', require('./routes/producto.routes'));
 
 module.exports= app;
