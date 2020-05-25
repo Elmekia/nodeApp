@@ -16,7 +16,7 @@ loginController.singup = async (req, res) => {
         errors.push({text: 'Debe ingresar un perfil'});
 
     if(errors.length > 0)
-        res.json(errors);
+        res.json({'error' : errors});
     else {
         const emailUser = await Usuario.findOne({email:email});
         if (emailUser)
@@ -25,19 +25,29 @@ loginController.singup = async (req, res) => {
             newUser = new Usuario({nombre, email, password, perfil});
             newUser.password = await newUser.encryptPassword(password);
             await newUser.save();
-            res.json(newUser);
+            res.json({'usuario' : newUser});
         }
     
     if(errors.length > 0)
-        res.json(errors);
+        res.json({'error' : errors});
     }
 
     res.json();
 
 };
 
-loginController.singin = (req, res) => {
-    res.json({signin: "ok"});
+loginController.singin = async (req, res) => {
+    const errors = [];
+    const { email, password } = req.body;
+    
+    const emailUser = await Usuario.findOne({email:email});
+    if (!emailUser)
+        res.json({ 'error' : 'email o password incorrecta' })
+
+    if (await emailUser.matchPassword(password))
+        res.json({ 'usuario' : emailUser });
+    else
+        res.json({ 'error' : 'email o password incorrecta' })
 };
 
 loginController.logout = (req, res) => {
