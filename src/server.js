@@ -17,6 +17,6 @@ app.use(morgan('dev'));
 // Routes
 app.use('/api', require('./routes/index.routes'));
 app.use('/api/login', require('./routes/login.routes'));
-app.use('/api', require('./routes/producto.routes'));
+app.use('/api/producto', require('./routes/producto.routes'));
 
 module.exports= app;

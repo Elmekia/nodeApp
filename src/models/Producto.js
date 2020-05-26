@@ -1,8 +1,11 @@
 const {Schema, model} = require('mongoose');
 
 const ProductoSchema = new Schema({
-    id: String,
     descripcion: {
+        type: String,
+        required: true,
+    },
+    usuario:{
         type: String,
         required: true,
     },
@@ -13,5 +16,9 @@ const ProductoSchema = new Schema({
 }, {
         timestamps: true
 })
+
+ProductoSchema.methods.getId = async function (){
+    return this.id;
+}
 
 module.exports = model('Producto', ProductoSchema, 'productos');
