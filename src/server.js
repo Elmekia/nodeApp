@@ -1,5 +1,6 @@
 const express = require('express');
-const morgan = require('morgan')
+const morgan = require('morgan');
+
 
 // Initializations
 const app = express();
@@ -18,5 +19,6 @@ app.use(morgan('dev'));
 app.use('/api', require('./routes/index.routes'));
 app.use('/api/login', require('./routes/login.routes'));
 app.use('/api/producto', require('./routes/producto.routes'));
+app.use('/api/upload', require('./routes/upload.routes'));
 
 module.exports= app;

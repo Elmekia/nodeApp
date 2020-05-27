@@ -8,8 +8,7 @@ loginController.singup = async (req, res) => {
     
     if(!password || password.length == 0)
         errors.push({text: 'Debe ingresar una contraseña'});
-
-    if (password != confirmPassword)
+    else if (password != confirmPassword)
         errors.push({text: 'Contraseñas no coinciden'});
     
     if(!perfil || perfil.length == 0)
